@@ -26,10 +26,6 @@ EOF
             sed -i "s/0x10098/0/g" "${2}"
             sed -i "s/0x1F/0x0/g" "${2}"
             ;;
-        vendor/lib/hw/audio.primary.apollon.so)
-            [ "$2" = "" ] && return 0
-            sed -i "s|/vendor/lib/liba2dpoffload\.so|liba2dpoffload_apollon\.so\x00\x00\x00\x00|g" "${2}"
-            ;;
         vendor/lib64/camera/components/com.mi.node.watermark.so)
             [ "$2" = "" ] && return 0
             grep -q "libpiex_shim.so" "${2}" || "${PATCHELF}" --add-needed "libpiex_shim.so" "${2}"
@@ -58,7 +54,7 @@ fi
 
 set -e
 
-export DEVICE=apollon
+export DEVICE=apollo
 export DEVICE_COMMON=sm8250-common
 export VENDOR=xiaomi
 export VENDOR_COMMON=${VENDOR}
